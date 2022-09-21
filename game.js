@@ -8,6 +8,9 @@
 const randomNumber = Math.round(Math.random() *100)
 console.log(randomNumber);
 
+//? variables
+let score = 10
+let topScore = 0
 
 
 
@@ -15,12 +18,26 @@ console.log(randomNumber);
 document.querySelector(".check-btn").addEventListener("click", () => {
     const guessInput = Number(document.querySelector(".guess-input").value)
     const msg = document.querySelector(".msg")
+    const body = document.querySelector("body")
 
 //? eğer input girilmediyse kullanıcıya uyarı ver
 if(!guessInput){
     msg.innerText = "Please enter a number"
 }else if (randomNumber === guessInput){
-    msg.innerHTML = "Congrats You Win"
+    msg.innerHTML = `Congrats You Win <i class="fa-solid fa-face-grin-hearts"></i>`
+    /* document.querySelector("body").style.background = "green" */
+    body.className = "bg-success"
+
+    if(score > topScore) {
+        topScore = score
+        document.querySelector(".top-score").textContent = topScore
+    }
+
+    document.querySelector(".secret-number").textContent = randomNumber
+} else {
+    score -= 1
+
+    guessInput > randomNumber ? (msg.innerText = "DECREASE") : (msg.innerText = "INCREASE")
 }
 })
 
