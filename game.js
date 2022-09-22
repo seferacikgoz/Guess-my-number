@@ -14,10 +14,8 @@ let score = 10
 
 //? localStorage de topScore adıyla bir değişken oluştur.
 let topScore = localStorage.getItem("topScore") || 0;
+//?DOM'daki top-score değerini localStorage değerini localStorage'den okuyarak güncelle
 document.querySelector(".top-score").textContent = topScore
-
-
-
 
 //* CheckBtn basıldığında kontrolleri yap
 document.querySelector(".check-btn").addEventListener("click", () => {
@@ -77,8 +75,18 @@ document.querySelector(".again-btn").addEventListener('click', () =>{
 })
 
 
+document.querySelector(".guess-input").addEventListener("keydown", (e) => {
+    if(e.code ==="Enter"){
+        document.querySelector(".check-btn").click()
+    }
+})
 
 
+
+/* myObj = {a:1, b:2, c:3}
+localStorage.setItem("OBJ", JSON.stringify(myObj)) */
+
+//* PSEDUO
 //? eğer score > topScore
 //?     topScore = score
 //? secret number görünür
@@ -94,7 +102,3 @@ document.querySelector(".again-btn").addEventListener('click', () =>{
 //? üzgünüz kaybettiniz
 
 //* againBtn basıldığında kontrolleri yap
-
-
-/* myObj = {a:1, b:2, c:3}
-localStorage.setItem("OBJ", JSON.stringify(myObj)) */
