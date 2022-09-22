@@ -34,14 +34,24 @@ if(!guessInput){
     }
 
     document.querySelector(".secret-number").textContent = randomNumber
-} else {
-    score -= 1
 
-    guessInput > randomNumber ? (msg.innerText = "DECREASE") : (msg.innerText = "INCREASE")
+    //! eğer rasgele sayı != input.value
+} else {
+    score --
+    if(score > 0){
+guessInput > randomNumber 
+    ? (msg.innerHTML = `<i class="fa-solid fa-arrow-trend-down"></i> DECREASE`) 
+    : (msg.innerHTML = `<i class="fa-solid fa-arrow-trend-up"></i> INCREASE`)
+}else {
+    msg.innerHTML = `You Lost <i class="fa-regular fa-face-sad-tear fa-2x"></i>` ;
+    body.className = "bg-danger"
+    document.querySelector(".check-btn").disabled = true
+}
+document.querySelector(".score").textContent = score
 }
 })
 
-//! eğer rasgele sayı == input.value
+
 //? tebrikler bildiniz
 //? background = green
 //? eğer score > topScore
