@@ -10,7 +10,12 @@ console.log(randomNumber);
 
 //? variables
 let score = 10
-let topScore = 0
+/* let topScore = 0 */
+
+//? localStorage de topScore adıyla bir değişken oluştur.
+let topScore = localStorage.getItem("topScore") || 0;
+document.querySelector(".top-score").textContent = topScore
+
 
 
 
@@ -30,9 +35,12 @@ if(!guessInput){
     /* document.querySelector("body").style.background = "green" */
     body.className = "bg-success"
     document.querySelector(".check-btn").disabled = true
-    if(score > topScore) {
-        topScore = score
-        document.querySelector(".top-score").textContent = topScore
+    if(score >= topScore) {
+       /*  topScore = score */
+
+       //?localeStorage deki topScore değişkenini güncelle
+       localStorage.setItem("topScore", score)
+        document.querySelector(".top-score").textContent = score
     }
 
     document.querySelector(".secret-number").textContent = randomNumber
@@ -86,3 +94,7 @@ document.querySelector(".again-btn").addEventListener('click', () =>{
 //? üzgünüz kaybettiniz
 
 //* againBtn basıldığında kontrolleri yap
+
+
+/* myObj = {a:1, b:2, c:3}
+localStorage.setItem("OBJ", JSON.stringify(myObj)) */
