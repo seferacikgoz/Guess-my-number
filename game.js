@@ -5,7 +5,7 @@
 
 //? 1-100 arasında rastgele bir sayı tut
 
-const randomNumber = Math.round(Math.random() *100)
+let randomNumber = Math.round(Math.random() *100)
 console.log(randomNumber);
 
 //? variables
@@ -23,11 +23,13 @@ document.querySelector(".check-btn").addEventListener("click", () => {
 //? eğer input girilmediyse kullanıcıya uyarı ver
 if(!guessInput){
     msg.innerText = "Please enter a number"
+
+     //! eğer rasgele sayı == input.value
 }else if (randomNumber === guessInput){
     msg.innerHTML = `Congrats You Win <i class="fa-solid fa-face-grin-hearts"></i>`
     /* document.querySelector("body").style.background = "green" */
     body.className = "bg-success"
-
+    document.querySelector(".check-btn").disabled = true
     if(score > topScore) {
         topScore = score
         document.querySelector(".top-score").textContent = topScore
@@ -44,6 +46,7 @@ guessInput > randomNumber
     : (msg.innerHTML = `<i class="fa-solid fa-arrow-trend-up"></i> INCREASE`)
 }else {
     msg.innerHTML = `You Lost <i class="fa-regular fa-face-sad-tear fa-2x"></i>` ;
+    document.querySelector(".secret-number").textContent = randomNumber
     body.className = "bg-danger"
     document.querySelector(".check-btn").disabled = true
 }
@@ -51,9 +54,23 @@ document.querySelector(".score").textContent = score
 }
 })
 
+//* again basıldığında oyunun baslangıç değerlerini kur
+document.querySelector(".again-btn").addEventListener('click', () =>{
+    score = 10
+    document.querySelector(".score").textContent = score
+    randomNumber = Math.round(Math.random() *100)
+    document.querySelector(".secret-number").textContent = "?"
+    console.log(randomNumber);
+    document.querySelector(".check-btn").disabled = false
+    document.querySelector("body").classList.remove("bg-success", "bg-danger")
+    document.querySelector(".guess-input").value = ""
+    document.querySelector(".msg").innerText = "Strarting.."
 
-//? tebrikler bildiniz
-//? background = green
+})
+
+
+
+
 //? eğer score > topScore
 //?     topScore = score
 //? secret number görünür
